@@ -18,17 +18,6 @@ const Container = styled.div`
     align-self: flex-end;
     margin-bottom: 20px;
   }
-  .container-todo {
-    display: flex;
-    height: 80%;
-    padding: 20px;
-    > :first-child {
-      width: 30%;
-    }
-    > :nth-child(2) {
-      width: 70%;
-    }
-  }
 `;
 
 function TodoScreen() {
@@ -37,11 +26,9 @@ function TodoScreen() {
       <TitleHelmet title="To Do List" />
       <ButtonLogOut />
       <TodoWriteTemplate />
-      <div className="container-todo">
-        <LoadingAndError loadingFallback={<TodoListLoading />} errorFallback={<TodoListError />}>
-          <TodoListTemplate />
-        </LoadingAndError>
-      </div>
+      <LoadingAndError loadingFallback={<TodoListLoading />} errorFallback={<TodoListError />}>
+        <TodoListTemplate />
+      </LoadingAndError>
     </Container>
   );
 }

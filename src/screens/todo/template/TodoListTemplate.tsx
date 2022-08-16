@@ -33,7 +33,7 @@ const ListContainer = styled.ul`
 
 function TodoListTemplate() {
   const { data: todosData, refetch: refetchTodos } = useGetTodos({ suspense: true });
-
+  
   return (
     <TodoListContainer data-cy="container-todo-list">
       {todosData?.length ? (

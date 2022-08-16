@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { Todo } from '../../../api/Todos/types';
-import { routes } from '../../routes';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
+import IconCheckBoxChecked from '../../../common/components/icons/IconCheckBoxChecked';
+import IconCheckBoxEmpty from '../../../common/components/icons/IconCheckBoxEmpty';
 import useDeleteTodo from '../hooks/useDeleteTodo';
 
 const Container = styled.li`
@@ -14,12 +13,6 @@ const Container = styled.li`
   border-radius: 20px;
   justify-content: space-between;
   margin-bottom: 10px;
-  &.selected {
-    background-color: skyblue;
-    span {
-      color: white;
-    }
-  }
   > a {
     color: black;
     text-decoration: none;
@@ -33,36 +26,22 @@ interface TodoListCardProps extends Todo {
   refetchTodos: () => void;
 }
 
-function TodoListCard({ id, title, createdAt, refetchTodos }: TodoListCardProps) {
+function TodoListCard({ id, todo, isCompleted, refetchTodos }: TodoListCardProps) {
   const { mutate } = useDeleteTodo();
-  const { id: currentTodoId } = useParams();
-  const navigate = useNavigate();
 
-  const isCardSelected = () => {
-    return id === currentTodoId
-  }
-
-
-  const deleteTodo = (e: React.MouseEvent<HTMLElement>, willDeleteTodoId: string) => {
-    e.stopPropagation();
-
+  const deleteTodo = (willDeleteTodoId: number) => {
     mutate(willDeleteTodoId, {
       onSuccess: () => {
-        if (isCardSelected()) {
-          navigate('/', { replace: true });
-        }
         refetchTodos();
       },
     });
   };
 
   return (
-    <Container data-cy="container-todo-card" className={`${isCardSelected() ? 'selected' : ''}`}>
-      <Link to={routes.home + id} data-cy="link-todo-detail">
-        <span data-cy="text-todo-list-title">{title}</span>
-        <span data-cy="text-todo-list-createdAt">{`${dayjs(createdAt).format('YYYY/MM/DD')}`}</span>
-      </Link>
-      <ButtonBasic title="X" type="button" data-cy="button-delete-todo" onClick={(e) => deleteTodo(e, id)} />
+    <Container data-cy="container-todo-card">
+      {isCompleted ? <IconCheckBoxChecked /> : <IconCheckBoxEmpty />}
+      <span data-cy="text-todo-list-title">{todo}</span>
+      <ButtonBasic title="X" type="button" data-cy="button-delete-todo" onClick={() => deleteTodo(id)} />
     </Container>
   );
 }
