@@ -5,16 +5,18 @@ export interface Todo {
   userId: number
 }
 
-export interface TodoParams {
-  title: string;
-  content: string;
+export interface TodoCreateParams {
+  todo: string;
+}
+
+export interface TodoEditParams extends TodoCreateParams {
+  isCompleted: boolean;
 }
 
 export type ApiGetTodosResponse = Todo[];
-
-export type ApiGetTodoById = Todo;
+export type ApiGetTodoResponse = Todo[];
 
 export interface ApiUpdateTodoArgs {
   id: string;
-  params: TodoParams;
+  params: TodoEditParams;
 }
