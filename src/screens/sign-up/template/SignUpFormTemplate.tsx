@@ -28,9 +28,9 @@ function SignUpFormTemplate() {
   const { mutate } = useSignUp();
 
   const signUpRequest = ({ email, password }: SignUpParams) => {
-    const onSuccess = ({ token }: SignUpResponse) => {
+    const onSuccess = ({ access_token }: SignUpResponse) => {
       window.alert('회원가입이 완료되었습니다.');
-      persistStore.set('TOKEN', token);
+      persistStore.set('TOKEN', access_token);
       navigate('/', { replace: true });
       window.location.reload();
     };

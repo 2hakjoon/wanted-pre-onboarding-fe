@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -26,9 +27,9 @@ function LoginFormTemplate() {
   const { mutate } = useLogin();
 
   const loginRequest = ({ email, password }: LoginParams) => {
-    const onSuccess = ({ token }: LoginResponse) => {
+    const onSuccess = ({ access_token }: LoginResponse) => {
       window.alert('로그인이 완료되었습니다.');
-      persistStore.set(authTokenKey, token);
+      persistStore.set(authTokenKey, access_token);
       window.location.reload();
     };
 

@@ -7,8 +7,7 @@ export interface LoginParams {
 }
 
 export interface LoginResponse {
-  message: string;
-  token: string;
+  access_token: string;
 }
 
 export type LoginError = AxiosError<ErrorResponse>
@@ -19,8 +18,7 @@ export interface SignUpParams {
 }
 
 export interface SignUpResponse {
-  message: string;
-  token: string;
+  access_token: string;
 }
 
 export type SignUpError = AxiosError<ErrorResponse>
