@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import SignUpScreen from './screens/sign-up/SignUpScreen';
 import LoginScreen from './screens/login/LoginScreen';
@@ -27,10 +27,12 @@ function App() {
             <Routes>
               {isLoggedIn ? (
                 <>
+                  <Route path={routes.home} element={<Navigate to={routes.todo} replace />} />
                   <Route path={routes.todo} element={<TodoScreen />} />
                 </>
               ) : (
                 <>
+                  <Route path={routes.todo} element={<Navigate to={routes.home} replace />} />
                   <Route path={routes.home} element={<LoginScreen />} />
                   <Route path={routes.join} element={<SignUpScreen />} />
                 </>
