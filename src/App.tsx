@@ -7,6 +7,7 @@ import { routes } from './screens/routes';
 import { theme } from './style/theme';
 import ErrorBoundary from './common/components/error-loading/ErrorBoundary';
 import { authTokenKey, persistStore } from './persistStore/persistStore';
+import TodoScreen from './screens/todo/TodoScreen';
 
 const Container = styled.main`
   width: 100%;
@@ -26,6 +27,7 @@ function App() {
             <Routes>
               {isLoggedIn ? (
                 <>
+                  <Route path={routes.todo} element={<TodoScreen />} />
                 </>
               ) : (
                 <>
