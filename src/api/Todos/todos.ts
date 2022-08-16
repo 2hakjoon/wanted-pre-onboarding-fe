@@ -4,17 +4,12 @@ import { ApiGetTodosResponse, ApiUpdateTodoArgs, Todo, TodoParams } from './type
 
 export const apiTodos = {
   async getTodos() {
-    const res = await apiFetch.get<FetchResponse<ApiGetTodosResponse>>(`${apiEndpont.getTodos}`);
-    return res.data;
+    return apiFetch.get<ApiGetTodosResponse>(`${apiEndpont.getTodos}`);
   },
   async createTodo(params: TodoParams) {
     return apiFetch.post(`${apiEndpont.createTodo}`, params);
   },
-  async getTodoById(id: string | undefined) {
-    const res = await apiFetch.get<FetchResponse<Todo>>(`${apiEndpont.getTodoById}/${id}`);
-    return res.data;
-  },
-  async deleteTodo(id: string) {
+  async deleteTodo(id: number) {
     return apiFetch.delete(`${apiEndpont.deleteTodo}/${id}`);
   },
   async updateTodo({ id, params }: ApiUpdateTodoArgs) {

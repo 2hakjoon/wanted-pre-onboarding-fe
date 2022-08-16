@@ -1,9 +1,8 @@
 export interface Todo {
-  title: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  id: string;
+  id: number,
+  todo: string,
+  isCompleted: boolean,
+  userId: number
 }
 
 export interface TodoParams {

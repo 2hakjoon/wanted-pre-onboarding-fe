@@ -17,13 +17,13 @@ const tokenMissingError = 'Token is missing';
 const apiBackend = axios.create({
   baseURL: backendBaseUrl,
   headers: {
-    Authorization: persistStore.get(authTokenKey) || '',
+    Authorization: `Bearer ${persistStore.get(authTokenKey) || ''}`,
   },
 });
 
 apiBackend.interceptors.request.use(
   (config) => {
-    if (config.headers) config.headers.Authorization = persistStore.get(authTokenKey) || '';
+    if (config.headers) config.headers.Authorization = `Bearer ${persistStore.get(authTokenKey) || ''}`;
     return config;
   },
   (error) => {
