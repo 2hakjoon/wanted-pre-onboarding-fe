@@ -33,7 +33,7 @@ function LoginFormTemplate() {
     };
 
     const onError = ({ response }: LoginError) => {
-      return response?.data && window.alert(response?.data.details);
+      return response?.data && window.alert(response?.data.message);
     };
 
     mutate({ email, password }, { onSuccess, onError });

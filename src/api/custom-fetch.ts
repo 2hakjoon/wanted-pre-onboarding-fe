@@ -7,7 +7,9 @@ import { backendBaseUrl } from './endpoints';
 export type FetchResponse<T> = { data: T };
 
 export interface ErrorResponse {
-  details: string;
+  error: string;
+  message: string;
+  statusCode: number;
 }
 
 const tokenMissingError = 'Token is missing';
@@ -34,7 +36,7 @@ apiBackend.interceptors.response.use(
     return res;
   },
   (error: AxiosError<ErrorResponse>): Promise<never> | undefined => {
-    const errorDetail = error.response?.data.details;
+    const errorDetail = error.response?.data.message;
     if (errorDetail === tokenMissingError) {
       window.alert('다시 로그인을 진행해 주세요.');
       window.history.pushState(null, '', '/');
