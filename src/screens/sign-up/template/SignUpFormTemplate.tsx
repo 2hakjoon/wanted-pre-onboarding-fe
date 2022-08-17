@@ -71,7 +71,7 @@ function SignUpFormTemplate() {
         onClick={signUpRequest}
       />
       <a className="link-join" href={routes.login}>
-        회원가입하기
+        로그인하기
       </a>
     </SignUpFormContainer>
   );
