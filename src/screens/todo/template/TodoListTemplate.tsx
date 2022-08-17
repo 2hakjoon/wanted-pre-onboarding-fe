@@ -5,7 +5,7 @@ import useGetTodos from '../hooks/useGetTodos';
 
 export const TodoListContainer = styled.section`
   width: 100%;
-  height: 100%;
+  height: 80vh;
   border: 2px solid darkgray;
   border-radius: 30px;
   margin-right: 50px;
