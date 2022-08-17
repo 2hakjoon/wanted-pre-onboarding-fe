@@ -9,7 +9,7 @@ import TodoListLoading from './template/TodoListLoading';
 import TodoListError from './template/TodoListError';
 
 const Container = styled.div`
-  width: 1000px;
+  width: 500px;
   height: 100vh;
   padding-top: 50px;
   display: flex;

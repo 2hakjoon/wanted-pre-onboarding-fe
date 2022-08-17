@@ -10,10 +10,10 @@ export const TodoListContainer = styled.section`
   border-radius: 30px;
   margin-right: 50px;
   padding: 20px 10px 20px 20px;
+  margin: 20px 0;
 `;
 
 const ListContainer = styled.ul`
-  padding-right: 10px;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;

@@ -15,6 +15,7 @@ const Container = styled.li`
   border-radius: 20px;
   justify-content: space-between;
   margin-bottom: 10px;
+  align-items: center;
   > a {
     color: black;
     text-decoration: none;

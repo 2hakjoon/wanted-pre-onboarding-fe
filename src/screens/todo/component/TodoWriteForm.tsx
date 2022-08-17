@@ -9,11 +9,9 @@ const FormWrapper = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
-  > * {
-    margin: 0 20px;
-  }
   button {
     flex-shrink: 0;
+    margin-left: 20px;
   }
 `;
 
