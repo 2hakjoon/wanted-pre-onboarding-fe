@@ -49,6 +49,8 @@ function TodoListCard({ id, todo, isCompleted, userId }: Todo) {
   const closeEditMode = () => setIsEditMode(false);
 
   const deleteTodo = () => {
+    if (!window.confirm('정말 삭제 하시겠습니까?')) return;
+
     mutate(id, {
       onSuccess: () => {
         queryClient.refetchQueries(getTodosKey);

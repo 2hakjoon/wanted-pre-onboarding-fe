@@ -31,6 +31,7 @@ function TodoEditForm({ todo: { id, isCompleted, todo }, closeEditMode }: TodoEd
   const { state, onChange } = useInput(todo);
 
   const handleUpdateTodo = () => {
+    if (!window.confirm('내용을 수정 하시겠습니까?')) return;
     const onSuccess = () => {
       closeEditMode();
     };
