@@ -66,7 +66,7 @@ function SignUpFormTemplate() {
       </div>
       <ButtonBasic
         title="회원가입"
-        disabled={!isEmailValild && !isPasswordValild}
+        disabled={!isEmailValild || !isPasswordValild}
         type="button"
         onClick={signUpRequest}
       />
