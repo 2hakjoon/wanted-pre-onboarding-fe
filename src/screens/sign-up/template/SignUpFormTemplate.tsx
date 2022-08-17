@@ -21,6 +21,7 @@ export const SignUpFormContainer = styled.form`
   padding: 20px;
   .input-container {
     width: 100%;
+    height: 50px;
     .text-error {
       display: block;
       margin-top: 10px;
@@ -35,6 +36,9 @@ function SignUpFormTemplate() {
   const { mutate } = useSignUp();
   const { emailState, onEmailChange, isEmailValild } = useEmailValid('');
   const { passwordState, onPasswordChange, isPasswordValild } = usePasswordValid('');
+
+  const showEmailError = () => !isEmailValild && emailState.length !== 0;
+  const showPassWordError = () => !isPasswordValild && passwordState.length !== 0;
 
   const signUpRequest = () => {
     const onSuccess = ({ access_token }: SignUpResponse) => {
@@ -54,6 +58,7 @@ function SignUpFormTemplate() {
       <span className="text-head">회원가입</span>
       <div className="input-container">
         <InputLabel value={emailState} onChange={onEmailChange} title="이메일" placeholder="이메일을 입력해주세요." />
+        {showEmailError() && <span className="text-error">유효한 이메일을 입력해주세요</span>}
       </div>
       <div className="input-container">
         <InputLabel
@@ -63,6 +68,7 @@ function SignUpFormTemplate() {
           type="password"
           placeholder="비밀번호를 입력해주세요."
         />
+        {showPassWordError() && <span className="text-error">비밀번호 8자리를 입력해주세요</span>}
       </div>
       <ButtonBasic
         title="회원가입"

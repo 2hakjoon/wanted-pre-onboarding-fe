@@ -22,6 +22,7 @@ export const LoginFormContainer = styled.form`
   padding: 20px;
   .input-container {
     width: 100%;
+    height: 50px;
     .text-error {
       display: block;
       margin-top: 10px;
@@ -36,6 +37,9 @@ function LoginFormTemplate() {
   const { mutate } = useLogin();
   const { emailState, onEmailChange, isEmailValild } = useEmailValid('');
   const { passwordState, onPasswordChange, isPasswordValild } = usePasswordValid('');
+
+  const showEmailError = () => !isEmailValild && emailState.length !== 0;
+  const showPassWordError = () => !isPasswordValild && passwordState.length !== 0;
 
   const loginRequest = () => {
     const onSuccess = ({ access_token }: LoginResponse) => {
@@ -56,6 +60,7 @@ function LoginFormTemplate() {
       <span className="text-head">로그인</span>
       <div className="input-container">
         <InputLabel title="이메일" value={emailState} onChange={onEmailChange} placeholder="이메일을 입력해주세요." />
+        {showEmailError() && <span className="text-error">유효한 이메일을 입력해주세요</span>}
       </div>
       <div className="input-container">
         <InputLabel
@@ -65,6 +70,7 @@ function LoginFormTemplate() {
           onChange={onPasswordChange}
           placeholder="비밀번호를 입력해주세요."
         />
+        {showPassWordError() && <span className="text-error">비밀번호 8자리를 입력해주세요</span>}
       </div>
       <ButtonBasic title="로그인" onClick={loginRequest} type="button" disabled={!isEmailValild || !isPasswordValild} />
       <a className="link-join" href={routes.join}>
