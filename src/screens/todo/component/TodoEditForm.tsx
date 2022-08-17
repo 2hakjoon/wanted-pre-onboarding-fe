@@ -11,11 +11,15 @@ import { TodoEditParams } from '../../../api/Todos/types';
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  > * {
-    margin-bottom: 10px;
+  input {
+    margin-top: 10px;
   }
-  div {
-    margin-right: 40px;
+  .button-container {
+    align-self: center;
+    margin-top: 10px;
+    button {
+      margin: 0px 10px;
+    }
   }
 `;
 
@@ -42,10 +46,10 @@ function TodoEditForm({ closeEditMode }: TodoEditForm) {
 
   return (
     <FormWrapper onSubmit={handleSubmit(handleUpdateTodo)}>
-      <InputBasic register={register('todo')} placeholder=""/>
-      <div>
+      <InputBasic register={register('todo')} placeholder="" />
+      <div className="button-container">
         <ButtonBasic title="취소" type="button" onClick={closeEditMode} />
-        <ButtonBasic title="저장" type="submit"/>
+        <ButtonBasic title="저장" type="submit" />
       </div>
     </FormWrapper>
   );
