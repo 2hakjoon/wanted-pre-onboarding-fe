@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Todo } from '../../../api/Todos/types';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
-import IconCheckBoxChecked from '../../../common/components/icons/IconCheckBoxChecked';
-import IconCheckBoxEmpty from '../../../common/components/icons/IconCheckBoxEmpty';
 import useDeleteTodo from '../hooks/useDeleteTodo';
 import { getTodosKey } from '../hooks/useGetTodos';
 import TodoEditForm from './TodoEditForm';
+import TodoListCheckBox from './TodoListCheckBox';
 
 const Container = styled.li`
   display: flex;
@@ -60,7 +59,7 @@ function TodoListCard({ id, todo, isCompleted, userId }: Todo) {
   return (
     <Container>
       <div className="todo-contents">
-        {isCompleted ? <IconCheckBoxChecked /> : <IconCheckBoxEmpty />}
+        <TodoListCheckBox todo={{ id, todo, isCompleted, userId }} />
         <span className="todo-text">{todo}</span>
         {!isEditMode && (
           <div className="button-container">
