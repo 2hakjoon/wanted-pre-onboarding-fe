@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import styled from 'styled-components';
 import { Todo } from '../../../api/Todos/types';
@@ -5,6 +6,7 @@ import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import IconCheckBoxChecked from '../../../common/components/icons/IconCheckBoxChecked';
 import IconCheckBoxEmpty from '../../../common/components/icons/IconCheckBoxEmpty';
 import useDeleteTodo from '../hooks/useDeleteTodo';
+import { getTodosKey } from '../hooks/useGetTodos';
 
 const Container = styled.li`
   display: flex;
@@ -22,17 +24,14 @@ const Container = styled.li`
   }
 `;
 
-interface TodoListCardProps extends Todo {
-  refetchTodos: () => void;
-}
-
-function TodoListCard({ id, todo, isCompleted, refetchTodos }: TodoListCardProps) {
+function TodoListCard({ id, todo, isCompleted }: Todo) {
+  const queryClient = useQueryClient();
   const { mutate } = useDeleteTodo();
 
   const deleteTodo = (willDeleteTodoId: number) => {
     mutate(willDeleteTodoId, {
       onSuccess: () => {
-        refetchTodos();
+        queryClient.refetchQueries(getTodosKey);
       },
     });
   };
