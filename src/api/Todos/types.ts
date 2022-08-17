@@ -1,8 +1,8 @@
 export interface Todo {
-  id: number,
-  todo: string,
-  isCompleted: boolean,
-  userId: number
+  id: number;
+  todo: string;
+  isCompleted: boolean;
+  userId: number;
 }
 
 export interface TodoCreateParams {
@@ -17,6 +17,6 @@ export type ApiGetTodosResponse = Todo[];
 export type ApiGetTodoResponse = Todo[];
 
 export interface ApiUpdateTodoArgs {
-  id: string;
+  id: number;
   params: TodoEditParams;
 }

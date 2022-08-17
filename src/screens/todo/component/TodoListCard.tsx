@@ -1,5 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
+
 import styled from 'styled-components';
 import { Todo } from '../../../api/Todos/types';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
@@ -22,11 +23,15 @@ const Container = styled.li`
     display: flex;
     align-items: center;
     .todo-text {
+      width: 100%;
       padding-left: 10px;
       text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
     .button-container {
       margin-left: auto;
+      flex-shrink: 0;
       * {
         margin-left: 10px;
       }
@@ -34,7 +39,7 @@ const Container = styled.li`
   }
 `;
 
-function TodoListCard({ id, todo, isCompleted }: Todo) {
+function TodoListCard({ id, todo, isCompleted, userId }: Todo) {
   const queryClient = useQueryClient();
   const { mutate } = useDeleteTodo();
 
@@ -64,7 +69,7 @@ function TodoListCard({ id, todo, isCompleted }: Todo) {
           </div>
         )}
       </div>
-      {isEditMode && <TodoEditForm closeEditMode={closeEditMode} />}
+      {isEditMode && <TodoEditForm todo={{ id, todo, isCompleted, userId }} closeEditMode={closeEditMode} />}
     </Container>
   );
 }

@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import InputBasic from '../../../common/components/input/InputBasic';
-import useGetTodos from '../hooks/useGetTodos';
 import useUpdateTodos from '../hooks/useUpdateTodo';
-import { TodoEditParams } from '../../../api/Todos/types';
+import { Todo, TodoEditParams } from '../../../api/Todos/types';
 
 const FormWrapper = styled.form`
   display: flex;
@@ -24,24 +22,20 @@ const FormWrapper = styled.form`
 `;
 
 interface TodoEditForm {
+  todo: Todo;
   closeEditMode: () => void;
 }
 
-function TodoEditForm({ closeEditMode }: TodoEditForm) {
-  const { id: todoId } = useParams();
-  const { register, handleSubmit } = useForm<TodoEditParams>();
-  const { refetch: refetchTodos } = useGetTodos({ suspense: true });
+function TodoEditForm({ todo: { id, isCompleted, todo }, closeEditMode }: TodoEditForm) {
+
+  const { register, handleSubmit } = useForm<TodoEditParams>({ defaultValues: { todo } });
   const { mutate } = useUpdateTodos();
 
-  const handleUpdateTodo = ({ todo, isCompleted }: TodoEditParams) => {
-    if (!todoId) {
-      return;
-    }
+  const handleUpdateTodo = ({ todo }: TodoEditParams) => {
     const onSuccess = () => {
       closeEditMode();
-      refetchTodos();
     };
-    mutate({ id: todoId, params: { todo, isCompleted } }, { onSuccess });
+    mutate({ id, params: { todo, isCompleted } }, { onSuccess });
   };
 
   return (

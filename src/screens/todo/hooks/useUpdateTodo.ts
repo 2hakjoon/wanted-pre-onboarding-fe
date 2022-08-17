@@ -1,8 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
-import { apiTodos } from "../../../api/Todos/todos";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiTodos } from '../../../api/Todos/todos';
+import { getTodosKey } from './useGetTodos';
 
 function useUpdateTodos() {
-  return useMutation(apiTodos.updateTodo);
+  const queryClient = useQueryClient();
+  return useMutation(apiTodos.updateTodo, { onSuccess: () => queryClient.invalidateQueries(getTodosKey) });
 }
 
-export default useUpdateTodos
+export default useUpdateTodos;
