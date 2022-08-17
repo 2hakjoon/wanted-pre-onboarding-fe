@@ -27,14 +27,14 @@ function App() {
             <Routes>
               {isLoggedIn ? (
                 <>
-                  <Route path={routes.home} element={<Navigate to={routes.todo} replace />} />
                   <Route path={routes.todo} element={<TodoScreen />} />
+                  <Route path="*" element={<Navigate to={routes.todo} replace />} />
                 </>
               ) : (
                 <>
-                  <Route path={routes.todo} element={<Navigate to={routes.home} replace />} />
                   <Route path={routes.home} element={<LoginScreen />} />
                   <Route path={routes.join} element={<SignUpScreen />} />
+                  <Route path="*" element={<Navigate to={routes.home} replace />} />
                 </>
               )}
             </Routes>

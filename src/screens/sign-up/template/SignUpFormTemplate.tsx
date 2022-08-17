@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { SignUpError, SignUpParams, SignUpResponse } from '../../../api/Auth/types';
 import useSignUp from '../hooks/useSignUp';
@@ -39,15 +38,12 @@ function SignUpFormTemplate() {
     formState: { errors: formErrors },
     handleSubmit,
   } = useForm<SignUpParams>({ mode: 'onBlur' });
-  const navigate = useNavigate();
-
   const { mutate } = useSignUp();
 
   const signUpRequest = ({ email, password }: SignUpParams) => {
     const onSuccess = ({ access_token }: SignUpResponse) => {
       window.alert('회원가입이 완료되었습니다.');
       persistStore.set('TOKEN', access_token);
-      navigate('/', { replace: true });
       window.location.reload();
     };
 
