@@ -17,7 +17,25 @@ https://main.d2rs2fzj39ia0m.amplifyapp.com/
 비밀번호 : 12345678
 ```
 
+## 프로젝트 결과물
+### 로그인
+![localhost_3002_](https://user-images.githubusercontent.com/61589338/185160307-3cae4a6f-62ff-4714-8a0a-9d987c0f997c.png)
+### 회원가입
+![localhost_3002_join](https://user-images.githubusercontent.com/61589338/185160621-fbaf233a-6e03-4225-8f3d-df13ae439326.png)
+### TodoList
+![localhost_3002_ (1)](https://user-images.githubusercontent.com/61589338/185160696-3d4daebe-4693-46c3-8f30-f52bab01b2aa.png)
 
+
+## 기술 스택
+* React
+* Typescript
+  * 타입기반의 안전한 프로그래밍을 위해 적용하였습니다.
+* Axios
+  * REST API 서버와의 통신하기 위해 error handleing, interceptor 기능이 있는 Axios를 사용하였습니다.
+* Tanstack React-Query,
+  * 데이터 캐싱 및 전역으로 Server State를 관리하기 위해 React-Query를 적용했습니다.
+* Styled Component
+  * 컴포넌트 스타일을 위해 적용했습니다.  
 
 ## 과제 구현 내용  
 
@@ -48,3 +66,124 @@ https://main.d2rs2fzj39ia0m.amplifyapp.com/
   - [x] 투두 리스트의 개별 아이템 우측에 수정버튼이 존재하고 해당 버튼을 누르면 수정모드가 활성화되고 투두 리스트의 내용을 수정할 수 있도록 해주세요
   - [x] 수정모드에서는 개별 아이템의 우측에 제출버튼과 취소버튼이 표시되며 해당 버튼을 통해서 수정 내용을 제출하거나 수정을 취소할 수 있도록 해주세요
   - [x] 투두 리스트의 개별 아이템 우측에 삭제버튼이 존재하고 해당 버튼을 누르면 투두 리스트가 삭제되도록 해주세요
+
+## 폴더 구조
+
+```
+|   .eslintrc
+|   .gitignore
+|   .prettierrc
+|   package.json
+|   README.md
+|   test.txt
+|   tsconfig.json
+|   yarn.lock
+|   
+\---src
+    |   App.tsx
+    |   index.css
+    |   index.tsx
+    |   react-app-env.d.ts
+    |   
+    +---api
+    |   |   custom-fetch.ts
+    |   |   endpoints.ts
+    |   |   
+    |   +---Auth
+    |   |       auth.ts
+    |   |       types.ts
+    |   |       
+    |   \---Todos
+    |           todos.ts
+    |           types.ts
+    |           
+    +---common
+    |   +---components
+    |   |   +---button
+    |   |   |       ButtonBasic.tsx
+    |   |   |       ButtonLogOut.tsx
+    |   |   |       
+    |   |   +---error-loading
+    |   |   |       ErrorBoundary.tsx
+    |   |   |       LoadingAndError.tsx
+    |   |   |       
+    |   |   +---helmet
+    |   |   |       TitleHelmet.tsx
+    |   |   |       
+    |   |   +---icons
+    |   |   |       IconCheckBoxChecked.tsx
+    |   |   |       IconCheckBoxEmpty.tsx
+    |   |   |       
+    |   |   \---input
+    |   |           InputBasic.tsx
+    |   |           InputCheckbox.tsx
+    |   |           InputLabel.tsx
+    |   |           
+    |   \---constants
+    |           regex.ts
+    |           
+    +---persistStore
+    |       persistStore.ts
+    |       
+    +---reactQuery
+    |       reactQuery.ts
+    |       
+    +---screens
+    |   |   routes.ts
+    |   |   
+    |   +---login
+    |   |   |   LoginScreen.tsx
+    |   |   |   
+    |   |   +---hooks
+    |   |   |       useLogin.ts
+    |   |   |       
+    |   |   \---template
+    |   |           LoginFormError.tsx
+    |   |           LoginFormLoading.tsx
+    |   |           LoginFormTemplate.tsx
+    |   |           
+    |   +---sign-up
+    |   |   |   SignUpScreen.tsx
+    |   |   |   
+    |   |   +---hooks
+    |   |   |       useSignUp.ts
+    |   |   |       
+    |   |   \---template
+    |   |           SignUpFormError.tsx
+    |   |           SignUpFormLoading.tsx
+    |   |           SignUpFormTemplate.tsx
+    |   |           
+    |   \---todo
+    |       |   TodoScreen.tsx
+    |       |   
+    |       +---component
+    |       |       TodoEditForm.tsx
+    |       |       TodoListCard.tsx
+    |       |       TodoListCheckBox.tsx
+    |       |       TodoWriteForm.tsx
+    |       |       
+    |       +---hooks
+    |       |       useCreateTodo.ts
+    |       |       useDeleteTodo.ts
+    |       |       useGetTodos.ts
+    |       |       useUpdateTodo.ts
+    |       |       
+    |       \---template
+    |               TodoListError.tsx
+    |               TodoListLoading.tsx
+    |               TodoListTemplate.tsx
+    |               TodoWriteTemplate.tsx
+    |               
+    +---style
+    |       theme.ts
+    |       
+    +---types
+    |       styled-component.d.ts
+    |       
+    \---utils
+        \---hooks
+                useEmailValid.ts
+                useInput.ts
+                usePasswordValid.ts
+                
+```
