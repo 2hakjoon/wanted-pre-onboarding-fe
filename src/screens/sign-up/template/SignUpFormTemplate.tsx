@@ -8,6 +8,7 @@ import InputLabel from '../../../common/components/input/InputLabel';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import { emailPattern, passwordPattern } from '../../../common/constants/regex';
 import { persistStore } from '../../../persistStore/persistStore';
+import { routes } from '../../routes';
 
 export const SignUpFormContainer = styled.form`
   border: 2px solid gray;
@@ -19,10 +20,25 @@ export const SignUpFormContainer = styled.form`
   justify-content: space-around;
   align-items: center;
   padding: 20px;
+  .input-container {
+    width: 100%;
+    .text-error {
+      display: block;
+      margin-top: 10px;
+      color: red;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
 `;
 
 function SignUpFormTemplate() {
-  const { register, getValues, formState, handleSubmit } = useForm<SignUpParams>({ mode: 'onChange' });
+  const {
+    register,
+    getValues,
+    formState: { errors: formErrors },
+    handleSubmit,
+  } = useForm<SignUpParams>({ mode: 'onBlur' });
   const navigate = useNavigate();
 
   const { mutate } = useSignUp();
@@ -43,8 +59,8 @@ function SignUpFormTemplate() {
 
   const isNotValild = () => {
     return (
-      Boolean(formState.errors.email?.type) === true ||
-      Boolean(formState.errors.password?.type) === true ||
+      Boolean(formErrors.email?.type) === true ||
+      Boolean(formErrors.password?.type) === true ||
       !getValues('email') ||
       !getValues('password')
     );
@@ -53,20 +69,26 @@ function SignUpFormTemplate() {
   return (
     <SignUpFormContainer onSubmit={handleSubmit(signUpRequest)}>
       <span className="text-head">회원가입</span>
-      <InputLabel
-        title="이메일"
-        register={register('email', { pattern: emailPattern })}
-        placeholder="이메일을 입력해주세요."
-      />
-      <InputLabel
-        title="비밀번호"
-        type="password"
-        register={register('password', { pattern: passwordPattern })}
-        placeholder="비밀번호를 입력해주세요."
-      />
-      <ButtonBasic title="회원가입" disabled={isNotValild()} type="submit"/>
-      <a className="link-join" href="/">
-        로그인하기
+      <div className="input-container">
+        <InputLabel
+          title="이메일"
+          register={register('email', { pattern: emailPattern })}
+          placeholder="이메일을 입력해주세요."
+        />
+        {formErrors.email && <span className="text-error">이메일 양식이 잘못되었습니다.</span>}
+      </div>
+      <div className="input-container">
+        <InputLabel
+          title="비밀번호"
+          type="password"
+          register={register('password', { pattern: passwordPattern })}
+          placeholder="비밀번호를 입력해주세요."
+        />
+        {formErrors.password && <span className="text-error">비밀번호는 8자리 이상입니다.</span>}
+      </div>
+      <ButtonBasic title="회원가입" disabled={isNotValild()} type="submit" />
+      <a className="link-join" href={routes.login}>
+        회원가입하기
       </a>
     </SignUpFormContainer>
   );
