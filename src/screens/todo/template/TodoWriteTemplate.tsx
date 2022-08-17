@@ -6,12 +6,12 @@ import { TodoCreateParams } from '../../../api/Todos/types';
 function TodoWriteTemplate() {
   const { mutate } = useCreateTodo();
 
-  const saveTodoHandler = ({ todo }: TodoCreateParams, onSuccess: () => void) => {
-    const onSuccessHandler = () => {
-      onSuccess();
+  const saveTodoHandler = ({ todo }: TodoCreateParams, afterSuccess: () => void) => {
+    const onSuccess = () => {
+      afterSuccess();
     };
 
-    mutate({ todo }, { onSuccess: onSuccessHandler });
+    mutate({ todo }, { onSuccess });
   };
 
   return <TodoWriteForm onSubmit={saveTodoHandler} />;
