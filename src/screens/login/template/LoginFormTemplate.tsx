@@ -5,8 +5,8 @@ import { LoginError, LoginResponse } from '../../../api/Auth/types';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import InputLabel from '../../../common/components/input/InputLabel';
 import { authTokenKey, persistStore } from '../../../persistStore/persistStore';
-import useEmailValid from '../../../utils/useEmailValid';
-import usePasswordValid from '../../../utils/usePasswordValid';
+import useEmailValid from '../../../utils/hooks/useEmailValid';
+import usePasswordValid from '../../../utils/hooks/usePasswordValid';
 import { routes } from '../../routes';
 import useLogin from '../hooks/useLogin';
 

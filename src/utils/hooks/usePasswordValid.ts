@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { passwordPattern } from '../common/constants/regex';
+import { passwordPattern } from '../../common/constants/regex';
 
 function usePasswordValid(initialValue: string) {
   const [passwordState, setPasswordState] = useState(initialValue);

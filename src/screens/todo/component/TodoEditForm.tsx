@@ -4,7 +4,7 @@ import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import InputBasic from '../../../common/components/input/InputBasic';
 import useUpdateTodos from '../hooks/useUpdateTodo';
 import { Todo } from '../../../api/Todos/types';
-import useInput from '../../../utils/useInput';
+import useInput from '../../../utils/hooks/useInput';
 
 const FormWrapper = styled.form`
   display: flex;

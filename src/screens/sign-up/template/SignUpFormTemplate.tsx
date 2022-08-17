@@ -5,8 +5,8 @@ import useSignUp from '../hooks/useSignUp';
 import InputLabel from '../../../common/components/input/InputLabel';
 import { persistStore } from '../../../persistStore/persistStore';
 import { routes } from '../../routes';
-import useEmailValid from '../../../utils/useEmailValid';
-import usePasswordValid from '../../../utils/usePasswordValid';
+import useEmailValid from '../../../utils/hooks/useEmailValid';
+import usePasswordValid from '../../../utils/hooks/usePasswordValid';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
 
 export const SignUpFormContainer = styled.form`

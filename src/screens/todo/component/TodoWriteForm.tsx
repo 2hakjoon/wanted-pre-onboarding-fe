@@ -3,7 +3,7 @@ import React from 'react';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import InputBasic from '../../../common/components/input/InputBasic';
 import { TodoCreateParams } from '../../../api/Todos/types';
-import useInput from '../../../utils/useInput';
+import useInput from '../../../utils/hooks/useInput';
 
 const FormWrapper = styled.form`
   display: flex;
