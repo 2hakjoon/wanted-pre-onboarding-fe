@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
 import React from 'react';
-import { SignUpError, SignUpParams, SignUpResponse } from '../../../api/Auth/types';
+import { SignUpError, SignUpResponse } from '../../../api/Auth/types';
 import useSignUp from '../hooks/useSignUp';
 import InputLabel from '../../../common/components/input/InputLabel';
-import ButtonBasic from '../../../common/components/button/ButtonBasic';
-import { emailPattern, passwordPattern } from '../../../common/constants/regex';
 import { persistStore } from '../../../persistStore/persistStore';
 import { routes } from '../../routes';
+import useEmailValid from '../../../utils/useEmailValid';
+import usePasswordValid from '../../../utils/usePasswordValid';
+import ButtonBasic from '../../../common/components/button/ButtonBasic';
 
 export const SignUpFormContainer = styled.form`
   border: 2px solid gray;
@@ -32,15 +32,11 @@ export const SignUpFormContainer = styled.form`
 `;
 
 function SignUpFormTemplate() {
-  const {
-    register,
-    getValues,
-    formState: { errors: formErrors },
-    handleSubmit,
-  } = useForm<SignUpParams>({ mode: 'onBlur' });
   const { mutate } = useSignUp();
+  const { emailState, onEmailChange, isEmailValild } = useEmailValid('');
+  const { passwordState, onPasswordChange, isPasswordValild } = usePasswordValid('');
 
-  const signUpRequest = ({ email, password }: SignUpParams) => {
+  const signUpRequest = () => {
     const onSuccess = ({ access_token }: SignUpResponse) => {
       window.alert('회원가입이 완료되었습니다.');
       persistStore.set('TOKEN', access_token);
@@ -50,39 +46,30 @@ function SignUpFormTemplate() {
     const onError = ({ response }: SignUpError) => {
       return response?.data && window.alert(response?.data.message);
     };
-    mutate({ email, password }, { onSuccess, onError });
-  };
-
-  const isNotValild = () => {
-    return (
-      Boolean(formErrors.email?.type) === true ||
-      Boolean(formErrors.password?.type) === true ||
-      !getValues('email') ||
-      !getValues('password')
-    );
+    mutate({ email: emailState, password: passwordState }, { onSuccess, onError });
   };
 
   return (
-    <SignUpFormContainer onSubmit={handleSubmit(signUpRequest)}>
+    <SignUpFormContainer>
       <span className="text-head">회원가입</span>
       <div className="input-container">
-        <InputLabel
-          title="이메일"
-          register={register('email', { pattern: emailPattern })}
-          placeholder="이메일을 입력해주세요."
-        />
-        {formErrors.email && <span className="text-error">이메일 양식이 잘못되었습니다.</span>}
+        <InputLabel value={emailState} onChange={onEmailChange} title="이메일" placeholder="이메일을 입력해주세요." />
       </div>
       <div className="input-container">
         <InputLabel
+          value={passwordState}
+          onChange={onPasswordChange}
           title="비밀번호"
           type="password"
-          register={register('password', { pattern: passwordPattern })}
           placeholder="비밀번호를 입력해주세요."
         />
-        {formErrors.password && <span className="text-error">비밀번호는 8자리 이상입니다.</span>}
       </div>
-      <ButtonBasic title="회원가입" disabled={isNotValild()} type="submit" />
+      <ButtonBasic
+        title="회원가입"
+        disabled={!isEmailValild && !isPasswordValild}
+        type="button"
+        onClick={signUpRequest}
+      />
       <a className="link-join" href={routes.login}>
         회원가입하기
       </a>

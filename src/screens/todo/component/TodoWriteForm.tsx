@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import InputBasic from '../../../common/components/input/InputBasic';
 import { TodoCreateParams } from '../../../api/Todos/types';
+import useInput from '../../../utils/useInput';
 
 const FormWrapper = styled.form`
   display: flex;
@@ -20,23 +20,20 @@ interface TodoWriteFormProps {
 }
 
 function TodoWriteForm({ onSubmit }: TodoWriteFormProps) {
-  const { register, handleSubmit, setValue } = useForm<TodoCreateParams>();
+  const { state, onChange, clear } = useInput('');
 
-  const saveTodoHandler = ({ todo }: TodoCreateParams) => {
-    if (todo.trim().length === 0) {
+  const saveTodoHandler = () => {
+    if (state.trim().length === 0) {
       window.alert('내용을 모두 입력해주세요.');
-      return;
     }
 
-    onSubmit({ todo }, () => {
-      setValue('todo', '');
-    });
+    onSubmit({ todo: state }, clear);
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit(saveTodoHandler)}>
-      <InputBasic register={register('todo')} placeholder="주제."/>
-      <ButtonBasic title="저장" type="submit"/>
+    <FormWrapper>
+      <InputBasic value={state} onChange={onChange} placeholder="주제." />
+      <ButtonBasic title="저장" type="button" onClick={saveTodoHandler} />
     </FormWrapper>
   );
 }

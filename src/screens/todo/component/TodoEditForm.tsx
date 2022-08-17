@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import ButtonBasic from '../../../common/components/button/ButtonBasic';
 import InputBasic from '../../../common/components/input/InputBasic';
 import useUpdateTodos from '../hooks/useUpdateTodo';
-import { Todo, TodoEditParams } from '../../../api/Todos/types';
+import { Todo } from '../../../api/Todos/types';
+import useInput from '../../../utils/useInput';
 
 const FormWrapper = styled.form`
   display: flex;
@@ -27,23 +27,22 @@ interface TodoEditForm {
 }
 
 function TodoEditForm({ todo: { id, isCompleted, todo }, closeEditMode }: TodoEditForm) {
-
-  const { register, handleSubmit } = useForm<TodoEditParams>({ defaultValues: { todo } });
   const { mutate } = useUpdateTodos();
+  const { state, onChange } = useInput(todo);
 
-  const handleUpdateTodo = ({ todo }: TodoEditParams) => {
+  const handleUpdateTodo = () => {
     const onSuccess = () => {
       closeEditMode();
     };
-    mutate({ id, params: { todo, isCompleted } }, { onSuccess });
+    mutate({ id, params: { todo: state, isCompleted } }, { onSuccess });
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit(handleUpdateTodo)}>
-      <InputBasic register={register('todo')} placeholder="" />
+    <FormWrapper>
+      <InputBasic value={state} onChange={onChange} placeholder="" />
       <div className="button-container">
         <ButtonBasic title="취소" type="button" onClick={closeEditMode} />
-        <ButtonBasic title="저장" type="submit" />
+        <ButtonBasic title="저장" type="button" onClick={handleUpdateTodo} />
       </div>
     </FormWrapper>
   );

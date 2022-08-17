@@ -1,5 +1,4 @@
-import React, { HTMLInputTypeAttribute } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -18,24 +17,19 @@ const Container = styled.div`
   }
 `;
 
-interface InputLabelProps {
+interface InputLabelProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  register: UseFormRegisterReturn<string>;
   placeholder: string;
-  type?: HTMLInputTypeAttribute | undefined;
 }
 
-function InputLabel({ title, register, placeholder, type, ...rest }: InputLabelProps) {
+function InputLabel({ title, placeholder, type, ...rest }: InputLabelProps) {
   return (
-    <Container {...rest}>
+    <Container>
       <span>{title}</span>
-      <input type={type} {...register} className="input" placeholder={placeholder} />
+      <input type={type} {...rest} className="input" placeholder={placeholder} />
     </Container>
   );
 }
 
-InputLabel.defaultProps = {
-  type: undefined,
-};
 
 export default InputLabel;
