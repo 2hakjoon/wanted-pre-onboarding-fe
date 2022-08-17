@@ -42,10 +42,10 @@ function TodoEditForm({ closeEditMode }: TodoEditForm) {
 
   return (
     <FormWrapper onSubmit={handleSubmit(handleUpdateTodo)}>
-      <InputBasic register={register('todo')} placeholder="" data-cy="input-edit-todo-title" />
+      <InputBasic register={register('todo')} placeholder=""/>
       <div>
-        <ButtonBasic title="취소" type="button" data-cy="button-edit-cancel" onClick={closeEditMode} />
-        <ButtonBasic title="저장" type="submit" data-cy="button-edit-save" />
+        <ButtonBasic title="취소" type="button" onClick={closeEditMode} />
+        <ButtonBasic title="저장" type="submit"/>
       </div>
     </FormWrapper>
   );

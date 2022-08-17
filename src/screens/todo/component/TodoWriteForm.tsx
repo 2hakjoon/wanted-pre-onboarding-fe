@@ -35,8 +35,8 @@ function TodoWriteForm({ onSubmit }: TodoWriteFormProps) {
 
   return (
     <FormWrapper onSubmit={handleSubmit(saveTodoHandler)}>
-      <InputBasic register={register('todo')} placeholder="주제." data-cy="input-todo-title" />
-      <ButtonBasic title="저장" type="submit" data-cy="button-save-todo" />
+      <InputBasic register={register('todo')} placeholder="주제."/>
+      <ButtonBasic title="저장" type="submit"/>
     </FormWrapper>
   );
 }

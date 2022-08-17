@@ -56,18 +56,16 @@ function SignUpFormTemplate() {
       <InputLabel
         title="이메일"
         register={register('email', { pattern: emailPattern })}
-        data-cy="input-email"
         placeholder="이메일을 입력해주세요."
       />
       <InputLabel
         title="비밀번호"
-        data-cy="input-password"
         type="password"
         register={register('password', { pattern: passwordPattern })}
         placeholder="비밀번호를 입력해주세요."
       />
-      <ButtonBasic title="회원가입" disabled={isNotValild()} type="submit" data-cy="button-join" />
-      <a className="link-join" href="/" data-cy="link-login">
+      <ButtonBasic title="회원가입" disabled={isNotValild()} type="submit"/>
+      <a className="link-join" href="/">
         로그인하기
       </a>
     </SignUpFormContainer>

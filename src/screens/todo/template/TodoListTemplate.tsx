@@ -35,7 +35,7 @@ function TodoListTemplate() {
   const { data: todosData } = useGetTodos({ suspense: true });
 
   return (
-    <TodoListContainer data-cy="container-todo-list">
+    <TodoListContainer>
       {todosData?.length ? (
         <ListContainer>
           {todosData.map((todo) => (

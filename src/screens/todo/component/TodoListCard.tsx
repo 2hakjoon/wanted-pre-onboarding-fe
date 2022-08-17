@@ -38,10 +38,13 @@ function TodoListCard({ id, todo, isCompleted }: Todo) {
   };
 
   return (
-    <Container data-cy="container-todo-card">
+    <Container>
       {isCompleted ? <IconCheckBoxChecked /> : <IconCheckBoxEmpty />}
-      <span data-cy="text-todo-list-title">{todo}</span>
-      <ButtonBasic title="X" type="button" data-cy="button-delete-todo" onClick={() => deleteTodo(id)} />
+      <span>{todo}</span>
+      <div>
+        <ButtonBasic title="삭제" type="button" onClick={() => deleteTodo(id)} />
+        <ButtonBasic title="수정" type="button" onClick={() => deleteTodo(id)} />
+      </div>
     </Container>
   );
 }
